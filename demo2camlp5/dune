@@ -1,0 +1,38 @@
+(env
+ (_
+  (flags
+   (:standard -warn-error +5))))
+
+(library
+ (name lib2)
+ (modules lib)
+ (flags (-rectypes))
+ (libraries OCanren OCanren.tester)
+ (wrapped false)
+ (preprocess
+  (action
+   (run demo2camlp5/pp5+gt+plugins+ocanren+dump.exe %{input-file}))))
+
+(executable
+ (name main)
+ (modules main)
+ (flags (-rectypes))
+ (libraries lib2)
+ (preprocess
+  (action
+   (run demo2camlp5/pp5+gt+plugins+ocanren+dump.exe %{input-file}))))
+
+(rule
+ (targets pp5+gt+plugins+ocanren+dump.exe)
+ (action
+  (run
+   mkcamlp5.opt
+   -package
+   camlp5,camlp5.pa_o,camlp5.macro,camlp5.pr_dump
+   -package
+   logger.syntax,GT-p5,GT.syntax.all,OCanren.syntax
+   -o
+   %{targets})))
+
+(cram
+ (deps ./main.exe))

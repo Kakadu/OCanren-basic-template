@@ -1,0 +1,31 @@
+(env
+ (_
+  (flags
+   (:standard -warn-error +5))))
+
+(library
+ (name lib1)
+ (modules lib)
+ (flags (-rectypes))
+ (libraries OCanren OCanren.tester)
+ (inline_tests)
+ (wrapped false)
+ (preprocess
+  (pps
+   OCanren-ppx.ppx_repr
+   OCanren-ppx.ppx_fresh
+   GT.ppx
+   GT.ppx_all
+   ppx_inline_test
+   OCanren-ppx.ppx_distrib)))
+
+(executable
+ (name main)
+ (modules main)
+ (flags (-rectypes))
+ (libraries lib1)
+ (preprocess
+  (pps OCanren-ppx.ppx_repr OCanren-ppx.ppx_fresh GT.ppx GT.ppx_all)))
+
+(cram
+ (deps ./main.exe))
