@@ -17,3 +17,4 @@ test:
 
 clean:
 	@dune clean
+	$(MAKE) -C demo3make clean
