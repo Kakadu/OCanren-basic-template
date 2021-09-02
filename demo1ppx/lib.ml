@@ -6,6 +6,7 @@ module Lam = struct
     | V of 'varname
     | App of 'self * 'self
     | Abs of 'varname * 'self
+  [@@deriving gt ~options:{ show; fmt; gmap }]
 
   type ground = (GT.string, ground) t]
 
