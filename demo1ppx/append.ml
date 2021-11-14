@@ -19,26 +19,7 @@ let _ =
   run_list (-1) qr qrh (REPR (fun xs ys -> appendo xs ys (Std.list ( !! ) [ 1; 2; 3 ])))
 ;;
 
-let rec reverso xs ys =
-  fresh
-    (h tl)
-    (conde
-       [ xs === Std.nil () &&& (xs === ys)
-       ; fresh temp (xs === List.cons h tl) (appendo temp !<h ys) (reverso tl temp)
-       ])
-;;
-
-(* works *)
-let _ = run_list 1 q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ])))
-
-(* works *)
-let _ = run_list (-1) q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ])))
-
-(* works *)
-let _ = run_list 1 q qh (REPR (fun xs -> reverso (Std.list ( !! ) [ 1; 2; 3 ]) xs))
-
-(* hangs *)
-let __ _ = run_list (-1) q qh (REPR (fun xs -> reverso (Std.list ( !! ) [ 1; 2; 3 ]) xs))
+let () = print_endline "Reverso: recursive call before appedo "
 
 let rec reverso xs ys =
   fresh
@@ -49,17 +30,39 @@ let rec reverso xs ys =
        ])
 ;;
 
+(* works  *)
+let _ = run_list 1 q qh (REPR (fun xs -> reverso (Std.list ( !! ) [ 1; 2; 3 ]) xs))
+
+(* works *)
+let _ = run_list (-1) q qh (REPR (fun xs -> reverso (Std.list ( !! ) [ 1; 2; 3 ]) xs))
+
 (* works *)
 let _ = run_list 1 q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ])))
 
-(* started to hang *)
-(* let __ _ = run_list (-1) q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ]))) *)
+(*  hangs *)
+let __ _ = run_list (-1) q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ])))
+let () = print_endline "Another implementation of reverso: appendo before recursive call"
 
-(* works as before  *)
+let rec reverso xs ys =
+  fresh
+    (h tl temp)
+    (conde
+       [ xs === Std.nil () &&& (xs === ys)
+       ; xs === List.cons h tl &&& appendo temp !<h ys &&& reverso tl temp
+       ])
+;;
+
+(* works *)
 let _ = run_list 1 q qh (REPR (fun xs -> reverso (Std.list ( !! ) [ 1; 2; 3 ]) xs))
 
-(* started to work *)
+(* started to hang *)
 let _ = run_list (-1) q qh (REPR (fun xs -> reverso (Std.list ( !! ) [ 1; 2; 3 ]) xs))
+
+(* works as before *)
+let _ = run_list 1 q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ])))
+
+(* started to work *)
+let _ = run_list (-1) q qh (REPR (fun xs -> reverso xs (Std.list ( !! ) [ 1; 2; 3 ])))
 
 module _ () = struct
   let flip f a b = f b a
