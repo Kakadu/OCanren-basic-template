@@ -1,12 +1,20 @@
 (env
  (_
   (flags
-   (:standard -warn-error +5))))
+   (:standard -warn-error +5-39))))
+
+(library
+ (name tester)
+ (modules tester timeout)
+ (flags
+  (:standard -rectypes))
+ (libraries OCanren))
 
 (library
  (name lib1)
  (modules lib)
- (flags (-rectypes))
+ (flags
+  (:standard -rectypes))
  (libraries OCanren OCanren.tester)
  (inline_tests)
  (wrapped false)
@@ -27,5 +35,13 @@
  (preprocess
   (pps OCanren-ppx.ppx_repr OCanren-ppx.ppx_fresh GT.ppx GT.ppx_all)))
 
+(executable
+ (name append)
+ (modules append)
+ (flags (-rectypes))
+ (libraries tester)
+ (preprocess
+  (pps OCanren-ppx.ppx_repr OCanren-ppx.ppx_fresh GT.ppx GT.ppx_all)))
+
 (cram
- (deps ./main.exe))
+ (deps ./main.exe ./append.exe))
