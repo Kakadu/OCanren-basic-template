@@ -3,12 +3,12 @@ opam-version: "2.0"
 version: "0.1"
 synopsis: "OCanren demo projects"
 maintainer: ["<empty>"]
-authors: ["FIXME Vasy Pupkin"]
+authors: ["<author>"]
 license: "MIT"
 depends: [
   "dune" {>= "2.7" & >= "2.8"}
-  "OCanren" {>= "0.3.0~"}
-  "OCanren-ppx" {>= "0.3.0~"}
+  "OCanren" {>= "0.3.0" | >= "0.3.0~alpha1"}
+  "OCanren-ppx" {>= "0.3.0" | >= "0.3.0~alpha1"}
   "odoc" {with-doc}
 ]
 build: [
