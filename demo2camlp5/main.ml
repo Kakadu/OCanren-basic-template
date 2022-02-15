@@ -4,7 +4,6 @@ open Lib
 open Lam
 
 let rec substo l x a l' =
-  (* let open Lam in *)
   conde
     [ fresh (y) (l === v y) (y === x) (l' === a)
     ; fresh
@@ -41,7 +40,8 @@ let a_la_quine q r s = ?&[ evalo (app q r) s; evalo (app r s) q; evalo (app s q)
 
 open Tester
 
-let runL n = runR Lam.reify (GT.show Lam.ground) (GT.show Lam.logic) n
+let runL eta = run_r Lam.reify (GT.show Lam.logic) eta
+let run_exn eta = run_r Lam.prj_exn eta
 
 let _ =
   run_exn (GT.show Lam.ground) 1 q qh (REPR (fun q -> substo (v varX) varX (v varY) q));

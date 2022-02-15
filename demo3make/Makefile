@@ -20,7 +20,7 @@ all: $(OUTO)
 
 # mkcamlp5.opt gives an error but shouldn't
 $(PREPROCESSOR):
-	mkcamlp5.opt -package camlp5,camlp5.pa_o,camlp5.macro,camlp5.pr_dump,logger.syntax,OCanren.syntax,GT-p5,GT.syntax.all -linkall -o $@
+	mkcamlp5.opt -package camlp5,camlp5.pa_o,camlp5.macro,camlp5.pr_dump,logger.syntax,OCanren.syntax,GT.syntax,GT.syntax.all -linkall -o $@
 
 .depend: $(SOURCES)
 	$(OCAMLDEP) $(PXFLAGS) *.ml > .depend

@@ -14,10 +14,10 @@
   (pps
    OCanren-ppx.ppx_repr
    OCanren-ppx.ppx_fresh
+   OCanren-ppx.ppx_distrib
    GT.ppx
    GT.ppx_all
-   ppx_inline_test
-   OCanren-ppx.ppx_distrib)))
+   ppx_inline_test)))
 
 (executable
  (name main)

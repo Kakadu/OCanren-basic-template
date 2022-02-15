@@ -6,22 +6,17 @@
 
 (license MIT)
 
-(authors "FIXME Vasy Pupkin")
+(authors "<author>")
 
 (package
  (name OCanren-base-example) ; FIXME and regenerate .opam file using 'dune build @install'
- (synopsis "FIXME An interpreter for language")
- (description
-  "FIXME. A longer description, for example, which are the most interesing features being supported, etc.")
+ (synopsis "OCanren demo projects")
  (version 0.1)
+ (maintainers "<empty>")
  (depends
   (dune
    (>= 2.8))
-  angstrom
-  (ppx_inline_test :with-test)
-  ppx_expect
-  (odoc :with-doc)
-  (ocamlformat :build)
-  base
+  (OCanren (>= 0.3.0~))
+  (OCanren-ppx (>= 0.3.0~))
   ; After adding dependencies to 'dune' files and the same dependecies here too
   ))
