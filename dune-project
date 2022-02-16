@@ -16,7 +16,11 @@
  (depends
   (dune
    (>= 2.8))
-  (OCanren (or (>= 0.3.0) (>= 0.3.0~alpha1)))
-  (OCanren-ppx (or (>= 0.3.0) (>= 0.3.0~alpha1)))
+  (OCanren
+   (>= 0.3.0~))
+  (noCanren
+   (>= 0.3.0~))
+  (OCanren-ppx
+   (>= 0.3.0~))
   ; After adding dependencies to 'dune' files and the same dependecies here too
   ))

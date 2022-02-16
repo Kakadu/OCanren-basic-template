@@ -7,8 +7,9 @@ authors: ["<author>"]
 license: "MIT"
 depends: [
   "dune" {>= "2.7" & >= "2.8"}
-  "OCanren" {>= "0.3.0" | >= "0.3.0~alpha1"}
-  "OCanren-ppx" {>= "0.3.0" | >= "0.3.0~alpha1"}
+  "OCanren" {>= "0.3.0~"}
+  "noCanren" {>= "0.3.0~"}
+  "OCanren-ppx" {>= "0.3.0~"}
   "odoc" {with-doc}
 ]
 build: [
