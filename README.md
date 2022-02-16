@@ -6,19 +6,22 @@
 
 ##### OCanren basic project
 
-There you can find an implementation of relational interpreter for untyped lambda calculus.
+There you can find starting projects for OCanren hacking:
 
-If you would like a PPX-based project, use template from `demo1ppx` directory, for camlp5 -- from `demo2camlp5`,
-for Makefile-based camlp5 project -- from `demo3make`.
+* The dune+PPX-based project is in `demo1ppx` directory.
+* The dune+Camlp5-based -- `demo2camlp5`
+* The Camlp5+Makefile -- `demo3make`.
+* The dune+noCanren -- `demo4ppx-noCanren`.
 
 ##### Dependencies
 
-
-* OCanren (>= 0.3.0~)
-* GT (>= 0.4.2)
 * dune (>= 2.7) -- a build system
+* GT (>= 0.4.2)
+* OCanren (>= 0.3.0~)
+* noCanren (>= 0.3.0~)
 
 
 ##### TODO
 
-- [ ] Implement a template using noCanren
+- [x] Implement a template using noCanren
+- [ ] Implement a template using noCanren + Makefile

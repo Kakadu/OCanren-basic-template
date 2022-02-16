@@ -1,0 +1,44 @@
+(env
+ (_
+  (flags
+   (:standard -warn-error +5-33))))
+
+(library
+ (name lib4)
+ (modules nat)
+ (flags
+  (:standard -rectypes))
+ (libraries GT OCanren)
+ (preprocess
+  (pps
+   OCanren-ppx.ppx_repr
+   OCanren-ppx.ppx_fresh
+   OCanren-ppx.ppx_distrib
+   GT.ppx
+   GT.ppx_all
+   ppx_inline_test))
+ (wrapped false))
+
+(rule
+ (targets nat.ml)
+ (deps
+  (:main nat.ml2mk.ml))
+ (action
+  (system
+   "noCanren %{main} -unnesting-mode -without-activate-tactics -show-result > %{targets}")))
+
+(executable
+ (name main)
+ (modules main)
+ (flags (-rectypes))
+ (libraries lib4 OCanren.tester)
+ (preprocess
+  (pps
+   OCanren-ppx.ppx_repr
+   OCanren-ppx.ppx_fresh
+   OCanren-ppx.ppx_distrib
+   GT.ppx
+   GT.ppx_all)))
+
+(cram
+ (deps ./main.exe))
