@@ -43,12 +43,10 @@ jobs:
         uses: avsm/setup-ocaml@v2
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
-          opam-pin: false
-          opam-depext: false
+          #opam-pin: false
+          #opam-depext: false
 
-
-      - run: opam show OCanren
-      - run: opam install . --deps-only --with-test
+      - run: opam install OCanren-base-example.dev --deps-only --with-test
       - run: opam exec -- dune build
       - run: opam exec -- dune runtest
       - run: opam exec -- make -C demo3make
