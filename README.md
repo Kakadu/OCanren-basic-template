@@ -12,6 +12,7 @@ There you can find starting projects for OCanren hacking:
 * The dune+Camlp5-based -- `demo2camlp5`
 * The Camlp5+Makefile -- `demo3make`.
 * The dune+noCanren -- `demo4ppx-noCanren`.
+* The Camlp5+PPX+noCanren+make -- `demo5`.
 
 ##### Dependencies
 
@@ -24,4 +25,4 @@ There you can find starting projects for OCanren hacking:
 ##### TODO
 
 - [x] Implement a template using noCanren
-- [ ] Implement a template using noCanren + Makefile
+- [x] Implement a template using noCanren + Makefile

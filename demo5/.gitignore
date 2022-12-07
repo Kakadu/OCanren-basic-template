@@ -1,0 +1,5 @@
+*.d
+*.byte
+*.exe
+/ppx_rewriter_random_8af9ecb7.ml
+/.depend
