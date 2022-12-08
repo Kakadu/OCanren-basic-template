@@ -13,18 +13,18 @@ jobs:
         os:
           - ubuntu-20.04
         ocaml-compiler:
-          - 4.13.1
+          - 4.14.0
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.7.0
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Retrieve date for cache key
         id: cache-key
@@ -33,7 +33,7 @@ jobs:
 
       - name: Restore opam cache
         id: opam-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "~/.opam"
           # invalidate cache daily, gets built daily using a scheduled job
