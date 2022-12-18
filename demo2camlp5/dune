@@ -6,12 +6,15 @@
 (library
  (name lib2)
  (modules lib)
- (flags (:standard -rectypes))
+ (flags
+  (:standard -rectypes))
  (libraries OCanren OCanren.tester)
  (wrapped false)
  (preprocess
   (action
-   (run demo2camlp5/pp5+gt+plugins+ocanren+dump.exe %{input-file}))))
+   (run
+    %{project_root}/demo2camlp5/pp5+gt+plugins+ocanren+dump.exe
+    %{input-file}))))
 
 (executable
  (name main)
@@ -20,7 +23,9 @@
  (libraries lib2)
  (preprocess
   (action
-   (run demo2camlp5/pp5+gt+plugins+ocanren+dump.exe %{input-file}))))
+   (run
+    %{project_root}/demo2camlp5/pp5+gt+plugins+ocanren+dump.exe
+    %{input-file}))))
 
 (rule
  (targets pp5+gt+plugins+ocanren+dump.exe)
