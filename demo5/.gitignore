@@ -1,5 +1,6 @@
 *.d
 *.byte
 *.exe
+*.cm[oixa]
 /ppx_rewriter_random_8af9ecb7.ml
 /.depend
