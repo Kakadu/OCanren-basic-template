@@ -5,17 +5,17 @@ OCAMLOPT = ocamlfind opt
 OCAMLDEP = ocamlfind dep
 OUTB = $(TOPFILE).byte
 OUTO = $(TOPFILE).exe
-PREPROCESSOR=pp5.exe
+P5PP_EXE = pp5.exe
 LIBS=
 PPX_EXE=ppx.exe
-PPX_MAIN=ppx_rewriter_random_8af9ecb7.ml
+PPX_MAIN=ppx_rewriter_main.ml
 CAMLP5 = -syntax camlp5o -package OCanren.syntax,GT.syntax,GT.syntax.all
-PXFLAGS = -pp "./$(PPX_EXE) -pp ./$(PREPROCESSOR)"
+PXFLAGS = -pp "./$(PPX_EXE) -pp ./$(P5PP_EXE)"
 # add flag -i to BFLAGS to show in the terminal the type signature of the program
 # add flag -dsource to BFLAG to dispaly in the terminal the source code after syntax expansion
 BFLAGS = -rectypes -g -package OCanren,OCanren.tester
 OFLAGS = $(BFLAGS)
-CLEAN = $(wildcard *.cm[iox] *.annot *.o *.d) $(OUTB) $(OUTO) $(PREPROCESSOR) $(PPX_EXE) ppx.ml lozov.ml
+CLEAN = $(wildcard *.cm[iox] *.annot *.o *.d) $(OUTB) $(OUTO) $(P5PP_EXE) $(PPX_EXE) lozov.ml
 
 .PHONY : all clean celan
 
@@ -25,7 +25,7 @@ all: $(OUTO)
 lib.ml: lozov.ml2mk.ml
 	noCanren -rectypes -useGT -distribs $^ -o $@
 
-lib.cmo lib.cmx lib.cmi: ppx.exe
+lib.cmo lib.cmx lib.cmi: $(PPX_EXE)
 
 ppx.exe:
 	@echo "let () = Ppxlib.Driver.standalone ()" > $(PPX_MAIN)
@@ -37,7 +37,7 @@ ppx.exe:
 	@$(RM) $(PPX_MAIN)
 
 # mkcamlp5.opt gives an error but shouldn't
-$(PREPROCESSOR):
+$(P5PP_EXE):
 	mkcamlp5.opt -package camlp5,camlp5.pa_o,camlp5.macro,camlp5.pr_dump,logger.syntax,OCanren.syntax,GT.syntax,GT.syntax.all -linkall -o $@
 
 main.cm[iox]: $(OFLAGS) += -dsource
@@ -61,19 +61,19 @@ clean:
 	$(OCAMLC) -c $(BFLAGS) $(PXFLAGS) $<
 
 # Note: cmi <- mli should go first
-%.cmi: %.ml $(PREPROCESSOR) $(PPX_EXE)
+%.cmi: %.ml $(P5PP_EXE) $(PPX_EXE)
 	$(OCAMLC) -c $(BFLAGS) $(PXFLAGS) $<
 
-%.cmo: %.ml $(PREPROCESSOR) $(PPX_EXE)
+%.cmo: %.ml $(P5PP_EXE) $(PPX_EXE)
 	$(OCAMLC) -c $(BFLAGS) $(PXFLAGS) $<
 
 %.o: %.ml
 	$(OCAMLOPT) -c $(OFLAGS) $(STATIC) $(PXFLAGS) $<
 
-%.cmx: %.ml $(PREPROCESSOR) $(PPX_EXE)
+%.cmx: %.ml $(P5PP_EXE) $(PPX_EXE)
 	$(OCAMLOPT) -c $(OFLAGS) $(STATIC) $(PXFLAGS) $<
 
-%.d: %.ml $(PREPROCESSOR) $(PPX_EXE)
+%.d: %.ml $(P5PP_EXE) $(PPX_EXE)
 	$(OCAMLDEP) $(PXFLAGS) $< > $@
 
 # http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/
