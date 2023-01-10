@@ -6,7 +6,7 @@
 
 ##### OCanren basic project
 
-There you can find starting projects for OCanren hacking:
+There you can find starting projects for [OCanren](https://github.com/PLTools/OCanren) hacking:
 
 * The dune+PPX-based project is in `demo1ppx` directory.
 * The dune+Camlp5-based -- `demo2camlp5`
@@ -18,11 +18,8 @@ There you can find starting projects for OCanren hacking:
 
 * dune (>= 2.7) -- a build system
 * GT (>= 0.4.2)
-* OCanren (>= 0.3.0~)
-* noCanren (>= 0.3.0~)
+* OCanren (> 0.3.0)
+* noCanren (>= 0.3.0)
 
 
 ##### TODO
-
-- [x] Implement a template using noCanren
-- [x] Implement a template using noCanren + Makefile
