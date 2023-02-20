@@ -7,6 +7,7 @@ authors: ["<author>"]
 license: "MIT"
 depends: [
   "dune" {>= "2.7" & >= "2.8"}
+  "js_of_ocaml"
   "OCanren" {>= "0.3.0~"}
   "noCanren" {>= "0.3.0~"}
   "OCanren-ppx" {>= "0.3.0~"}

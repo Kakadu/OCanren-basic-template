@@ -16,6 +16,7 @@
  (depends
   (dune
    (>= 2.8))
+  js_of_ocaml
   (OCanren
    (>= 0.3.0~))
   (noCanren
