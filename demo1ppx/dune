@@ -33,6 +33,7 @@
  (modules appendo)
  (flags
   (:standard -rectypes))
+ (modes native js)
  (libraries lib1)
  (preprocess
   (pps OCanren-ppx.ppx_repr OCanren-ppx.ppx_fresh GT.ppx GT.ppx_all)))
