@@ -9,6 +9,7 @@ jobs:
   build:
     env:
       OPAMROOT: /home/user/.opam
+      OPAMYES: true
 
     runs-on: ubuntu-22.04
     container:
@@ -29,7 +30,7 @@ jobs:
 
       - run: opam pin . --yes --no-action
       - run: opam pin add https://github.com/PLTools/OCanren.git --yes
-      - run: opam install OCanren-base-example --deps-only --with-test
+      - run: opam install OCanren-base-example --yes --deps-only --with-test
       - run: opam exec -- dune build
       - run: opam exec -- dune runtest
       - run: opam exec -- make -C demo3make
