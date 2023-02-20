@@ -22,10 +22,20 @@
 (executable
  (name main)
  (modules main)
- (flags (-rectypes))
+ (flags
+  (:standard -rectypes))
+ (libraries lib1)
+ (preprocess
+  (pps OCanren-ppx.ppx_repr OCanren-ppx.ppx_fresh GT.ppx GT.ppx_all)))
+
+(executable
+ (name appendo)
+ (modules appendo)
+ (flags
+  (:standard -rectypes))
  (libraries lib1)
  (preprocess
   (pps OCanren-ppx.ppx_repr OCanren-ppx.ppx_fresh GT.ppx GT.ppx_all)))
 
 (cram
- (deps ./main.exe))
+ (deps ./main.exe appendo.exe))

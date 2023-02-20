@@ -1,3 +1,11 @@
+  $ ./appendo.exe
+  fun q -> fun r -> appendo q r (list (!!) [1; 2; 3; 4]), all answers {
+  q=[]; r=[1; 2; 3; 4];
+  q=[1]; r=[2; 3; 4];
+  q=[1; 2]; r=[3; 4];
+  q=[1; 2; 3]; r=[4];
+  q=[1; 2; 3; 4]; r=[];
+  }
   $ ./main.exe
   fun q -> substo (v varX) varX (v varY) q, 1 answer {
   q=V ("y");

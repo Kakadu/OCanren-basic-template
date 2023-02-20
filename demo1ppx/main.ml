@@ -1,5 +1,4 @@
 open OCanren
-open Tester
 open Lib
 open Lam
 
