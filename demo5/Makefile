@@ -9,11 +9,11 @@ P5PP_EXE = pp5.exe
 LIBS=
 PPX_EXE=ppx.exe
 PPX_MAIN=ppx_rewriter_main.ml
-CAMLP5 = -syntax camlp5o -package OCanren.syntax,GT.syntax,GT.syntax.all
+CAMLP5 = -syntax camlp5o -package OCanren.syntax,GT.syntax,GT.syntax.all,camlp5.pr_dump
 PXFLAGS = -pp "./$(PPX_EXE) -pp ./$(P5PP_EXE)"
 # add flag -i to BFLAGS to show in the terminal the type signature of the program
 # add flag -dsource to BFLAG to dispaly in the terminal the source code after syntax expansion
-BFLAGS = -rectypes -g -package OCanren,OCanren.tester
+BFLAGS = -rectypes -g -package OCanren,OCanren.tester #-dsource
 OFLAGS = $(BFLAGS)
 CLEAN = $(wildcard *.cm[iox] *.annot *.o *.d) $(OUTB) $(OUTO) $(P5PP_EXE) $(PPX_EXE) lozov.ml
 
