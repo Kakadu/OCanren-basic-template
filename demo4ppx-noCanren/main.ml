@@ -4,13 +4,13 @@ open Tester
 module Nat = struct
   include Nat
 
-  [%%distrib
-  type nonrec 'a0 t = 'a0 gnat =
-    | O
-    | S of 'a0
-  [@@deriving gt ~options:{ show; gmap }]
+  [%%ocanren_inject
+    type nonrec 'a0 t = 'a0 Nat.t =
+      | O
+      | S of 'a0
+    [@@deriving gt ~options:{ show; gmap }]
 
-  type ground = ground t]
+    type ground = ground t]
 
   let one : injected = s (o ())
   let zero : injected = o ()

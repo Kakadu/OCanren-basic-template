@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'master'
+  schedule:
+    - cron: '0 0 * * 1' # Runs every Monday at midnight UTC
+
 
 jobs:
   build:
@@ -29,8 +32,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - run: opam pin add https://github.com/PLTools/OCanren.git --yes
-      - run: opam pin add https://github.com/PLTools/noCanren.git --yes
+      - run: opam pin add https://github.com/PLTools/OCanren.git --yes --no-action
+      - run: opam pin add https://github.com/PLTools/noCanren.git --yes --no-action
       - run: opam pin . --no-action
 
       - run: opam install OCanren-base-example --yes --deps-only --with-test
