@@ -9,16 +9,17 @@ jobs:
   build:
     env:
       OPAMROOT: /home/user/.opam
-      OPAMYES: true
+      OPAMCONFIRMLEVEL: unsafe-yes
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     container:
-      image: kakadu18/ocaml:pltlab
+      image: kakadu18/ocaml:pltools
       options: --user user
 
     steps:
       - run: opam --version
       - run: opam exec -- ocamlopt --version
+      - run: opam update
 
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -28,9 +29,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - run: opam pin . --yes --no-action
       - run: opam pin add https://github.com/PLTools/OCanren.git --yes
+      - run: opam pin add https://github.com/PLTools/noCanren.git --yes
+      - run: opam pin . --no-action
+
       - run: opam install OCanren-base-example --yes --deps-only --with-test
       - run: opam exec -- dune build
       - run: opam exec -- dune runtest
       - run: opam exec -- make -C demo3make
+
+      - run: opam exec -- make -C demo5make
