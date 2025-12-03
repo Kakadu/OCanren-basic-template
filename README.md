@@ -32,8 +32,8 @@ There you can find starting projects for [OCanren](https://github.com/PLTools/OC
 
 * dune (>= 2.7) -- a build system
 * GT (>= 0.4.2)
-* OCanren (> 0.3.0)
-* noCanren (>= 0.3.0)
+* [OCanren](https://github.com/PLTools/OCanren) (> 0.3.0)
+* [noCanren](https://github.com/PLTools/noCanren) (>= 0.3.0)
 
 
 ##### TODO
