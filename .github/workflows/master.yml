@@ -18,16 +18,15 @@ jobs:
     container:
       image: kakadu18/ocaml:pltools
       options: --user user
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - run: opam --version
       - run: opam exec -- ocamlopt --version
       - run: opam update
-
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
-        with:
-          access_token: ${{ github.token }}
+      - run: sudo apt-get install node
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -39,6 +38,12 @@ jobs:
       - run: opam install OCanren-base-example --yes --deps-only --with-test
       - run: opam exec -- dune build
       - run: opam exec -- dune runtest
+      - run: |
+          opam exec -- dune b demo1ppx/appendo.bc.js
+          node _build/default/demo1ppx/appendo.bc.js
+
       - run: opam exec -- make -C demo3make
 
-      - run: opam exec -- make -C demo5make
+      - run: |
+          opam exec -- make -C demo5
+          demo5/demo5.exe
