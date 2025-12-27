@@ -7,25 +7,34 @@
  (name lib2)
  (modules lib)
  (flags
-  (:standard -rectypes))
+  (:standard -rectypes -dsource))
  (libraries OCanren OCanren.tester)
  (wrapped false)
+ (preprocessor_deps
+  %{project_root}/demo2camlp5/pp5+gt+plugins+ocanren+dump.exe)
  (preprocess
-  (action
-   (run
-    %{project_root}/demo2camlp5/pp5+gt+plugins+ocanren+dump.exe
-    %{input-file}))))
+  (pps
+   OCanren-ppx.ppx_deriving_reify
+   OCanren-ppx.ppx_fresh
+   --
+   -pp
+   demo2camlp5/pp5+gt+plugins+ocanren+dump.exe)))
 
 (executable
  (name main)
  (modules main)
- (flags (-rectypes))
+ (flags
+  (:standard -rectypes))
  (libraries lib2)
+ ; We use below a smaller preprocessor, but in principal any Camlp5-bases one works here
+ (preprocessor_deps %{project_root}/demo2camlp5/pp5+logger+dump.exe)
  (preprocess
-  (action
-   (run
-    %{project_root}/demo2camlp5/pp5+gt+plugins+ocanren+dump.exe
-    %{input-file}))))
+  (pps
+   OCanren-ppx.ppx_deriving_reify
+   OCanren-ppx.ppx_fresh
+   --
+   -pp
+   demo2camlp5/pp5+logger+dump.exe)))
 
 (rule
  (targets pp5+gt+plugins+ocanren+dump.exe)
@@ -36,6 +45,18 @@
    camlp5,camlp5.pa_o,camlp5.macro,camlp5.pr_dump
    -package
    logger.syntax,GT.syntax,GT.syntax.all,OCanren.syntax
+   -o
+   %{targets})))
+
+(rule
+ (targets pp5+logger+dump.exe)
+ (action
+  (run
+   mkcamlp5.opt
+   -package
+   camlp5,camlp5.pa_o,camlp5.macro,camlp5.pr_dump
+   -package
+   logger.syntax
    -o
    %{targets})))
 

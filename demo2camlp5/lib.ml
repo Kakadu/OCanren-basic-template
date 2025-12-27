@@ -33,3 +33,9 @@ module Lam = struct
   let varY = !!"y"
   let varF = !!"f"
 end
+
+include (struct
+  let x = [%reify:  Lam.ground Std.List.ground]
+end : sig
+  val x: (Lam.injected Std.List.injected, Lam.logic Std.List.logic) Reifier.t
+end)
