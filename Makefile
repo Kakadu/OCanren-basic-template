@@ -17,4 +17,6 @@ test:
 
 clean:
 	@dune clean
-	$(MAKE) -C demo3make clean
+	$(MAKE) -C demo3make clean --no-print-directory
+	$(MAKE) -C demo5 clean --no-print-directory
+
